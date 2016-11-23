@@ -1,9 +1,14 @@
 #!/bin/bash
 
+# Changelog
+# v0.1        initial version
+# v0.1.1      add output option
+
 slices=20
 url=
+output=
 
-__ScriptVersion="0.1"
+__ScriptVersion="v0.1.1"
 
 #===  FUNCTION  ================================================================
 #         NAME:  usage
@@ -17,7 +22,8 @@ function usage ()
     -h|help       Display this message
     -v|version    Display script version
     -u|url        The URL to download
-    -s|slice      How many slices the download task will split"
+    -s|slice      How many slices the download task will split, default is 20
+    -o|output     Specify the output file name, use the guessing file name from url as output file name if not specify this option"
 
 }    # ----------  end of function usage  ----------
 
@@ -25,7 +31,7 @@ function usage ()
 #  Handle command line arguments
 #-----------------------------------------------------------------------
 
-while getopts ":hvu:s:" opt
+while getopts ":hvu:s:o:" opt
 do
   case $opt in
 
@@ -36,6 +42,8 @@ do
     u|url      )  url=$OPTARG ;;
 
     s|slice    )  slices=$OPTARG ;;
+
+	o|output   )  output=$OPTARG ;;
 
 	* )  echo -e "\n  Option does not exist : $OPTARG\n"
 		  usage; exit 1   ;;
@@ -48,6 +56,8 @@ shift $(($OPTIND-1))
 
 path=${url##*/}
 file_to_save=${path%\?*}
+
+[ x$output != x ] && file_to_save=$output
 
 echo Download $url to $file_to_save with $slices tasks.
 
