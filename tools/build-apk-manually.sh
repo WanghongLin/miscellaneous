@@ -31,6 +31,8 @@
 	exit 1
 }
 
+# use the latest build tool version
+# and the oldest platform version for compatibility
 _BUILD_TOOLS_VERSION=$(ls $ANDROID_SDK_ROOT/build-tools | sort -n |tail -1)
 _PLATORM=$(ls $ANDROID_SDK_ROOT/platforms | sort -nr |tail -1) 
 _APK_BASENAME=MyApplication
