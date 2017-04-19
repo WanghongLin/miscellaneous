@@ -28,3 +28,9 @@ endfunction
 ```
 
 Case-sensitive `==#` and case-insensitive `==?` string comparing
+
+
+Execute command on selected text
+```vim
+:'<,'>:w !command<CR>
+```
