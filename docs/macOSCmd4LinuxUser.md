@@ -5,6 +5,16 @@
 Like double click in GUI, since it can select the right application, it's a replacement of many command in Linux.
 (nautils to open directory, eog to open pictures, evince to open pdf, etc.)
 
+* `open -a` -- run application
+
+It's very useful when you want to run application with arguments, e.g running Google Chrome with arguments
+
+```shell
+open -a /Applications/Google\ Chrome.app --args --proxy-server=host#:port#
+# or with socks5 proxy
+open -a /Applications/Google\ Chrome.app --args --proxy-server="socks5://host#:port#"
+```
+
 * `softwareupdate` -- system software update tool
 
 `apt-get` for Debian/Ubuntu, and `yum` for RedHat/Fedora
