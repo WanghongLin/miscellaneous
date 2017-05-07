@@ -11,7 +11,8 @@ def show_usage():
   print '\t-h|--help show this help'
   print '\t-v|--verbose verbose mode'
   print '\t-t|--title specify the title of your blog, e.g \'My blog title\''
-  print '\t-c|--categories specify the categories of your blog\n'
+  print '\t-c|--categories specify the categories of your blog'
+  print '\t-o|--output specify output file name, will write to a default file name if not specify, - stand for stdout\n'
   sys.exit(0)
 
 def error_action():
@@ -29,6 +30,8 @@ d['-c'] = ''
 d['--categories'] = ''
 d['-v'] = 0
 d['--verbose'] = 0
+d['-o'] = ''
+d['--output'] = ''
 
 verbose = False
 title = ''
@@ -38,7 +41,7 @@ def main():
   try:
     # Short option syntax: "hv:"
     # Long option syntax: "help" or "verbose="
-    opts, args = getopt.getopt(sys.argv[1:], "hv:t:c:", ['help', 'title=', 'categories=', 'verbose='])
+	opts, args = getopt.getopt(sys.argv[1:], "hv:t:c:o:", ['help', 'title=', 'categories=', 'verbose=', 'output='])
   except getopt.GetoptError, err:
     # Print debug info
     show_usage()
@@ -75,6 +78,19 @@ def main():
   content = '---\nlayout: post\ntitle: {0}\ndate: {1}\ncategories: {2}\n---\n'.format(title, \
       time.strftime('%F %T %z', time.gmtime()), categories)
   filename = time.strftime('%F', time.localtime()) + '-' + title.lower().replace(' ', '-') + '.markdown'
+
+  if len(d.get('--output')) > 0 or len(d.get('-o')) > 0:
+	  if d.get('--output') == '-' or d.get('-o') == '-':
+		  print filename
+		  sys.stdout.write(content)
+		  return
+	  else:
+		  if len(d.get('--output')) > 0:
+			  filename = d.get('--output')
+
+		  if len(d.get('-o')) > 0:
+			  filename = d.get('-o')
+
 
   f = open(filename, 'w+')
   f.write(content)
