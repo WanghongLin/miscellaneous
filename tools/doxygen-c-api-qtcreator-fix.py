@@ -83,7 +83,9 @@ def main(qhp_file):
     if should_write_back_to_file:
       print 'insert QtCreator style marker for %s' % html_file.name
       html_file.seek(0)
-      html_file.write(html_soup.prettify().encode('utf-8'))
+      # DO NOT prettify
+      # for the code in the html, use unicode is more readable
+      html_file.write(unicode(html_soup).encode('utf-8'))
     html_file.close()
     pass
 
