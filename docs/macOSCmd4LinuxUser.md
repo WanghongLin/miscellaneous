@@ -37,6 +37,8 @@ Use `df` to get mounted volumn, the use `diskutil umount /volumn/name` to eject.
 
 * `system_profiler` -- reports system hardware and software configuration
 
+To get system graphics card info, we can execute `system_profiler SPDisplaysDataType`
+
 * `mdutil` -- manage the metadata stores used by Spotlight
 
 Like `updatedb` for `locate` in Linux, `mdutil` is a mangement tool for **Spotlight** in Mac
