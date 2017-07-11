@@ -102,7 +102,7 @@ def build_anr_hierarchy(in_anrs):
     return in_anrs
 
 
-def analyze_anr(anr_file):
+def analyze_anr(anr_file, out_format):
     with anr_file as anr:
 
         handle_process_header = False
@@ -157,7 +157,7 @@ def analyze_anr(anr_file):
                     (anr_list), len(anr_new_list)
 
                 if has_graphviz:
-                    dot = graphviz.Digraph(comment='ANR output for {0}'.format(out_pb.name), graph_attr={'rankdir': 'LR'})
+                    dot = graphviz.Digraph(comment='ANR output for {0}'.format(out_pb.name), graph_attr={'rankdir': 'LR'}, format=out_format)
 
                 for oanr in anr_new_list:
 
@@ -184,9 +184,10 @@ def analyze_anr(anr_file):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Analyze ANR from traces.txt, output as pdf by graphviz')
+    parser.add_argument('--format', choices=['ps', 'pdf', 'svg', 'png', 'gif', 'jpg'], help='Specify the output format')
     parser.add_argument('file', type=argparse.FileType('r'), default=sys.stdin, help='Absolute path to traces.txt')
     args = parser.parse_args()
 
-    analyze_anr(args.file)
+    analyze_anr(args.file, args.format)
 
 
