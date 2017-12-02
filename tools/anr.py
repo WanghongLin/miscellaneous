@@ -163,6 +163,12 @@ def analyze_anr(anr_file, out_format):
 
                     if has_graphviz:
                         dot.node(oanr.anr_thread.title, oanr.anr_thread.thread_stack, _attributes={'xlabel': oanr.anr_thread.title})
+
+
+                        # DO NOT allow empty name
+                        if len(oanr.held_by_thread.title) == 0:
+                            oanr.held_by_thread.title = 'Unknow'
+
                         dot.node(oanr.held_by_thread.title, oanr.held_by_thread.thread_stack, _attributes={'xlabel': make_html_colored_text('#ff0000', oanr.held_by_thread.title)})
                         dot.edge(oanr.anr_thread.title, oanr.held_by_thread.title)
 
@@ -176,6 +182,8 @@ def analyze_anr(anr_file, out_format):
 
                 if has_graphviz:
                     out_gv_file = '{0}_{1}.gv'.format(out_pb.name, out_pb.pid)
+                    # remove the special characters at some ANR logs
+                    out_gv_file = out_gv_file.replace('/', '_')
                     print 'render to file', out_gv_file
                     dot.render(out_gv_file)
 
