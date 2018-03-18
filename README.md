@@ -9,6 +9,7 @@ miscellaneous stuff will put here, configurations, code templates, tools, etc.
 * [tools/build-apk-manually.sh](tools/build-apk-manually.sh) Illustrate how a APK is built from `aapt`, `dx`, `jarsigner`, etc.
 * [tools/anr.py](tools/anr.py) ANR analayze tool, create graphic output from `traces.txt` by using `graphviz`
 * [tools/clext.py](tools/clext.py) Convert OpenCL error code to humanreable string
+* [tools/clion-cmake.sh](tools/clion-cmake.sh) Create a simple cmake file for C/C++ source tree for the purpose of source code navigation
 
 ### Manpages
 * [man/eglman](man/eglman) man pages for EGL
