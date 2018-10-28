@@ -56,3 +56,12 @@ Is there similar tool in Linux?
 This command is a little interesting. Any equivalent in Linux?
 
 * Single user mode, `Command + S` immediately after power on, `init 1` in Linux
+
+Simulate `readlink -f` command to get the full path of a file in OS X
+
+* Use the python code to simulate as an alais
+
+```python
+alias fullpath="python -c 'import os;import sys;print(os.path.abspath(sys.argv[1]))'"
+```
+Then use the command `fullpath` with a replacement of `readlink -f` in any place.
