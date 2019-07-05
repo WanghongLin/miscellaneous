@@ -58,6 +58,8 @@ libicui18n.dylib
 libicuuc.dylib
 ```
 
+The id of the library and dependencies on these libraries are abolsute path, e.g `/usr/local/lib/libv8.dylib` so wee need set `DYLD_LIBRARY_PATH` to verify our build output. You can use `otool` and `install_name_tool` to update the dependencies.
+
 Integrate v8 into jswrapper
 ------
 1. Copy all the [sources](https://github.com/cocos-creator/cocos2d-x-lite/tree/develop/cocos/scripting/js-bindings/jswrapper) into your project
