@@ -1,6 +1,8 @@
 Use libheif in Android platform
 ======
 
+This article illustrate the steps how to create a soft encode/decode heif library for Android by using `libheif`, `libde265` and `x265`.
+
 Build x265 from CMakeLists.txt
 ------
 * Create a standalone toolchains
