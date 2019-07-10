@@ -151,7 +151,7 @@ Other v8 learning resource
 ------
 * [v8 ObjectTemplate](https://stackoverflow.com/questions/34478341/in-the-v8-javascript-engine-how-to-make-a-constructor-function-that-re-uses-an)
 * [A tour of v8](https://www.jayconrod.com/posts/51/a-tour-of-v8--full-compiler)
-* [Javascript native wrappers](https://medium.com/@hyperandroid/javascript-native-wrappers-in-v8-part-i-67851a3a797a)
+* [Javascript native wrappers in v8](https://medium.com/@hyperandroid/javascript-native-wrappers-in-v8-part-i-67851a3a797a)
 
 Reference
 ------
