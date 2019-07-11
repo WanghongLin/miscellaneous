@@ -70,3 +70,7 @@ int main(int argc, char* argv[])
     return EXIT_SUCCESS;
 }
 ```
+More resources
+------
+* [v8 - GoDoc](https://godoc.org/github.com/augustoroman/v8)
+* [Does V8 engine support multithreading programming](https://groups.google.com/forum/#!topic/v8-users/oN_3tVBd3H4)
