@@ -67,6 +67,11 @@ Build libpng for Android
 * Get and extract the source
 Download the source from [Source Forge](https://libpng.sourceforge.io/)
 
+```sh
+$ cd /tmp
+$ tar Jxvf ~/Downloads/libpng-1.6.37.tar.xz
+```
+
 * Configure and build
 ```sh
 $ export CC=/tmp/ndk/bin/arm-linux-androideabi-clang CFLAGS='-fPIE' LDFLAGS='-fPIE -pie' PATH=$PATH:/tmp/ndk/bin
