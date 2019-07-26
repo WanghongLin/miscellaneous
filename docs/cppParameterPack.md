@@ -89,11 +89,25 @@ Callable<double, int, double, void*, char> callable([](int i, double d, void* p,
 std::cout << "Callable return " << callable.call() << std::endl;
 ```
 __Explanation__:
+The parameter pack expansion flow illustrate as following:
 
-`Gen<5>` -> `Gen<4, 4>` -> `Gen<3, 3, 4>` -> `Gen<2, 2, 3, 4>` -> `Gen<1, 1, 2, 3, 4>` -> `Gen<0, 0, 1, 2, 3, 4>`
+```cpp
+Gen<5> 
+Gen<4, 4> 
+Gen<3, 3, 4> 
+Gen<2, 2, 3, 4> 
+Gen<1, 1, 2, 3, 4>
+Gen<0, 0, 1, 2, 3, 4>
+```
 
-The final `Gen<0, 0, 1, 2, 3, 4>` will match our user-specified specialization and `Gen<0, 0, 1, 2, 3, 4>::type` is `Seq<0, 1, 2, 3, 4>`
+The final `Gen<0, 0, 1, 2, 3, 4>` will match our user-specified specialization and `Gen<0, 0, 1, 2, 3, 4>::type` is `Seq<0, 1, 2, 3, 4>`, then we use this type as parameter type in `invoke` and make tuple to expand the arguments, is equivalent to the call `_f(std::get<0>(_t), std::get<1>(_t), std::get<2>(_t), std::get<3>(_t), std::get<4>(_t))`. We achieve the goal to call function with arbitrary arguments by using tuple.
 
 Reference
 ------
 * [How to unpack a std::tuple to a function with multiple arguments?](https://github.com/hokein/Wiki/wiki/How-to-unpack-a-std::tuple-to-a-function-with-multiple-arguments%3F)
+* [“unpacking” a tuple to call a matching function pointer](https://stackoverflow.com/questions/7858817/unpacking-a-tuple-to-call-a-matching-function-pointer)
+* [Unpacking Tuples in C++14](http://aherrmann.github.io/programming/2016/02/28/unpacking-tuples-in-cpp14/)
+* [Variadic templates in C++](https://eli.thegreenplace.net/2014/variadic-templates-in-c/)
+* [Parameter pack(since C++11)](https://en.cppreference.com/w/cpp/language/parameter_pack)
+* [C++17 provide apply to call function with tuple](https://en.cppreference.com/w/cpp/utility/apply)
+
