@@ -17,11 +17,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+#
+# Comparision multiprocessing vs threading
+# Comparision linecache vs with/open
+#
 
 import threading
 import multiprocessing
 import itertools
 import subprocess
+import linecache
 
 
 def get_file_lines(file_name):
@@ -96,6 +101,31 @@ def parse_large_file_via_threading(file_path):
     [t.join() for t in threads]
 
 
+def parse_line_range(cached_lines, start_line, stop_line):
+    for line in range(start_line, stop_line):
+        cached_lines[line].split(',')
+
+
+def parse_large_file_via_line_cache(file_path):
+    file_lines = get_file_lines(file_path)
+    number_of_threads = multiprocessing.cpu_count()/2
+    slice_lines = file_lines / number_of_threads
+
+    cached_lines = linecache.updatecache(file_path)
+    threads = []
+    for i in range(number_of_threads):
+        start_line = i * slice_lines
+        stop_line = max((i+1)*slice_lines, file_lines) if i+1 == number_of_threads else (i+1)*slice_lines
+        t_name = 'Line cache thread {}'.format(i)
+        print('{} {} -> {}'.format(t_name, start_line, stop_line))
+        t = threading.Thread(target=parse_line_range, name=t_name,
+                             args=(cached_lines, start_line, stop_line))
+        threads.append(t)
+        t.start()
+
+    [t.join() for t in threads]
+
+
 if __name__ == '__main__':
     import argparse
     import time
@@ -105,6 +135,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='Large file parse example')
     parser.add_argument('--threading', default=False, action='store_true',
                         help='Use threading to parse file, default is no')
+    parser.add_argument('--caching', default=False, action='store_true',
+                        help='Use linecache to parse file, default is no')
     parser.add_argument('input', nargs=1, help='Input file path')
 
     args = parser.parse_args(sys.argv[1:])
@@ -113,6 +145,10 @@ if __name__ == '__main__':
         start_time = time.time()
         parse_large_file_via_threading(args.input[0])
         print('Time took for threading {}'.format(datetime.timedelta(seconds=(time.time()-start_time))))
+    elif args.caching:
+        start_time = time.time()
+        parse_large_file_via_line_cache(args.input[0])
+        print('Time took for linecache {}'.format(datetime.timedelta(seconds=(time.time()-start_time))))
     else:
         start_time = time.time()
         parse_large_file_via_multiprocessing(args.input[0])
