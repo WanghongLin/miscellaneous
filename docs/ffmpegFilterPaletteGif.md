@@ -23,7 +23,7 @@ $ echo 'nullsrc,fps=15,scale=320:-1:flags=lanczos,split [o1] [o2];[o1] palettege
 In order to use the command above, your system must have [graphviz](http://www.graphviz.org/) installed. Also I change the output
 graph rank direction from `left/right` to `top/bottom` by replacing `LR` with `TB`.
 
-![Gif Palette](docs/filter_graph_palette.png)
+![Gif Palette](filter_graph_palette.png)
 
 If we use command above, we can turn a video with 2MB size and get a 6.2MB gif output. By specifying some parameters, we can have
 a slight improvement for the size of resulting file.
@@ -50,3 +50,4 @@ Reference
 * [Optimizing GIFS with FFMPEG](https://cassidy.codes/blog/2017/04/25/ffmpeg-frames-to-gif-optimization/)
 * [Optimize animated GIF size in command-line](https://superuser.com/questions/1107200/optimize-animated-gif-size-in-command-line)
 * [How do I convert a video to GIF using ffmpeg, with reasonable quality?](https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality)
+* [gifsicle](https://github.com/kohler/gifsicle)
