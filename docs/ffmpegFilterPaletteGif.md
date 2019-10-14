@@ -46,7 +46,7 @@ If the result file size still can not meet your requirement, extra steps can tak
 2. use `gifsicle` to reduce color index or perform other optimize
 
 Reference
-======
+------
 * [Optimizing GIFS with FFMPEG](https://cassidy.codes/blog/2017/04/25/ffmpeg-frames-to-gif-optimization/)
 * [Optimize animated GIF size in command-line](https://superuser.com/questions/1107200/optimize-animated-gif-size-in-command-line)
 * [How do I convert a video to GIF using ffmpeg, with reasonable quality?](https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality)
