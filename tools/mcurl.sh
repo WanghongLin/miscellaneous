@@ -32,7 +32,7 @@ __ScriptVersion="v0.1.1"
 #===============================================================================
 function usage ()
 {
-	echo "Usage :  $0 [options]
+    echo "Usage :  $0 [options]
 
     Options:
     -h|help       Display this message
@@ -49,22 +49,15 @@ function usage ()
 
 while getopts ":hvu:s:o:" opt
 do
-  case $opt in
-
+    case $opt in
 	h|help     )  usage; exit 0   ;;
-
 	v|version  )  echo "Multi tasks downloader for curl, version $__ScriptVersion"; exit 0   ;;
-
-    u|url      )  url=$OPTARG ;;
-
-    s|slice    )  slices=$OPTARG ;;
-
+	u|url      )  url=$OPTARG ;;
+	s|slice    )  slices=$OPTARG ;;
 	o|output   )  output=$OPTARG ;;
-
 	* )  echo -e "\n  Option does not exist : $OPTARG\n"
-		  usage; exit 1   ;;
-
-  esac    # --- end of case ---
+	    usage; exit 1   ;;
+    esac    # --- end of case ---
 done
 shift $(($OPTIND-1))
 
@@ -75,9 +68,15 @@ file_to_save=${path%\?*}
 
 [ x$output != x ] && file_to_save=$output
 
-echo Download $url to $file_to_save with $slices tasks.
+echo "Download $url to $file_to_save with $slices tasks."
 
-size_in_byte=$(curl -I "$url" 2>/dev/null | sed -n 's/\(Content-Length:\)\(.*\)/\2/p' | tr -d [[:space:]])
+size_in_byte=$(curl -I "$url" 2>/dev/null | sed -n 's/\([Cc]ontent-[Ll]ength:\)\(.*\)/\2/p' | tr -d [[:space:]])
+
+if ! [[ $size_in_byte =~ ^[0-9]+$ ]];then
+    printf "\e[31mCould not get content length, make sure your resource have content length response.\e[0m\n"
+    exit 1
+fi
+
 size_per_slice=$(($size_in_byte/$slices))
 let size_per_slice=${size_per_slice}+1  # avoid rounding issue
 
@@ -127,3 +126,5 @@ do
 	fi
 	sleep 1
 done
+
+echo
