@@ -20,7 +20,7 @@
 # v0.1        initial version
 # v0.1.1      add output option
 
-slices=20
+slices=$(grep -c processor /proc/cpuinfo)
 url=
 output=
 
@@ -32,12 +32,11 @@ __ScriptVersion="v0.1.1"
 #===============================================================================
 function usage ()
 {
-    echo "Usage :  $0 [options]
+    echo "Usage :  $0 [options] url
 
     Options:
     -h|help       Display this message
     -v|version    Display script version
-    -u|url        The URL to download
     -s|slice      How many slices the download task will split, default is 20
     -o|output     Specify the output file name, use the guessing file name from url as output file name if not specify this option"
 
@@ -47,12 +46,11 @@ function usage ()
 #  Handle command line arguments
 #-----------------------------------------------------------------------
 
-while getopts ":hvu:s:o:" opt
+while getopts ":hv:s:o:" opt
 do
     case $opt in
 	h|help     )  usage; exit 0   ;;
 	v|version  )  echo "Multi tasks downloader for curl, version $__ScriptVersion"; exit 0   ;;
-	u|url      )  url=$OPTARG ;;
 	s|slice    )  slices=$OPTARG ;;
 	o|output   )  output=$OPTARG ;;
 	* )  echo -e "\n  Option does not exist : $OPTARG\n"
@@ -61,7 +59,13 @@ do
 done
 shift $(($OPTIND-1))
 
-[ -z $url ] && { usage; exit 1; }
+url=${@: -1}
+
+if ! [[ $url =~ ^http[s]://.*$ ]];then
+    printf "\e[31mInvalid URL $url\e[0m\n"
+    usage
+    exit 1
+fi
 
 url_no_query=${url%%\?*}
 file_to_save=${url_no_query##*/}
