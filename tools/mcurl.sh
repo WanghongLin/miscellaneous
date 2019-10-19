@@ -79,8 +79,9 @@ echo Download $url to $file_to_save with $slices tasks.
 
 size_in_byte=$(curl -I "$url" 2>/dev/null | sed -n 's/\(Content-Length:\)\(.*\)/\2/p' | tr -d [[:space:]])
 size_per_slice=$(($size_in_byte/$slices))
+let size_per_slice=${size_per_slice}+1  # avoid rounding issue
 
-total_slice=$(($slices+1))
+total_slice=${slices}
 finished_slice=0
 is_finished=0
 function callback()
