@@ -63,8 +63,8 @@ shift $(($OPTIND-1))
 
 [ -z $url ] && { usage; exit 1; }
 
-path=${url##*/}
-file_to_save=${path%\?*}
+url_no_query=${url%%\?*}
+file_to_save=${url_no_query##*/}
 
 [ x$output != x ] && file_to_save=$output
 
@@ -122,7 +122,7 @@ do
 	if [ -f $$.1 ];then
 		total_kb=$(du -b $$.* | awk '{t+=$1}END{printf "%d", t/1024}')
 		duration=$((`date +%s`-$start_time))
-		[ $duration -gt 0 ] && printf "\rCurrent average speed %4dKiB/s" $(($total_kb/$duration))
+		[ $duration -gt 0 ] && printf "\rCurrent average speed %4d KiB/s" $(($total_kb/$duration))
 	fi
 	sleep 1
 done
