@@ -119,3 +119,4 @@ Reference
 * [node-rsa](https://www.npmjs.com/package/node-rsa)
 * [openssl-rsa-java](https://adangel.org/2016/08/29/openssl-rsa-java/)
 * [RSA Encryption and Decryption in Java](https://www.devglan.com/java8/rsa-encryption-decryption-java)
+* [Generate self-signed ssl](https://www.ibm.com/support/knowledgecenter/en/SSMNED_5.0.0/com.ibm.apic.cmc.doc/task_apionprem_gernerate_self_signed_openSSL.html)
