@@ -1,0 +1,8 @@
+<templateSet group="AndroidKotlin">
+  <template name="starter" value="companion object {&#10;    fun starter(activity: android.app.Activity) {&#10;        android.content.Intent(activity, $CLASS$::class.java).also {&#10;            activity.startActivity(it)&#10;        }&#10;    }&#10;}" description="Android activity starter" toReformat="false" toShortenFQNames="true">
+    <variable name="CLASS" expression="kotlinClassName()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN_CLASS" value="true" />
+    </context>
+  </template>
+</templateSet>

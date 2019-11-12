@@ -1,61 +1,48 @@
 <templateSet group="AndroidNative">
-  <template name="logf" value="LOGF(&quot;$END$&quot;)" description="Log Fatal" toReformat="false" toShortenFQNames="true">
+  <template name="logf" value="ALOGF(&quot;$END$&quot;)" description="Log Fatal" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="OC_STATEMENT_C" value="true" />
     </context>
   </template>
-  <template name="logv" value="LOGV(&quot;$END$&quot;)" description="Log Verbose" toReformat="false" toShortenFQNames="true">
+  <template name="logv" value="ALOGV(&quot;$END$&quot;)" description="Log Verbose" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="OC_STATEMENT_C" value="true" />
     </context>
   </template>
-  <template name="loge" value="LOGE(&quot;$END$&quot;)" description="Log Error" toReformat="false" toShortenFQNames="true">
+  <template name="loge" value="ALOGE(&quot;$END$&quot;)" description="Log Error" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="OC_STATEMENT_C" value="true" />
     </context>
   </template>
-  <template name="logw" value="LOGW(&quot;$END$&quot;)" description="Log Warn" toReformat="false" toShortenFQNames="true">
+  <template name="logw" value="ALOGW(&quot;$END$&quot;)" description="Log Warn" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="OC_STATEMENT_C" value="true" />
     </context>
   </template>
-  <template name="logi" value="LOGI(&quot;$END$&quot;)" description="Log Info" toReformat="false" toShortenFQNames="true">
+  <template name="logi" value="ALOGI(&quot;$END$&quot;)" description="Log Info" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="OC_STATEMENT_C" value="true" />
     </context>
   </template>
-  <template name="logd" value="LOGD(&quot;$END$&quot;);" description="Log debug" toReformat="false" toShortenFQNames="true">
+  <template name="logd" value="ALOGD(&quot;$END$&quot;);" description="Log debug" toReformat="false" toShortenFQNames="true">
     <context>
-      <option name="JAVA_CODE" value="false" />
-      <option name="JAVA_STATEMENT" value="false" />
-      <option name="JAVA_EXPRESSION" value="false" />
-      <option name="JAVA_DECLARATION" value="false" />
-      <option name="JAVA_COMMENT" value="false" />
-      <option name="JAVA_STRING" value="false" />
-      <option name="COMPLETION" value="false" />
-      <option name="c" value="false" />
-      <option name="OC_DECLARATION_C" value="false" />
       <option name="OC_STATEMENT_C" value="true" />
-      <option name="OC_EXPRESSION_C" value="false" />
     </context>
   </template>
-  <template name="logger" value="#include &lt;android/log.h&gt;&#10;&#10;#define TAG &quot;$FILE_BASE_NAME$&quot;&#10;#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, TAG, __VA_ARGS__)&#10;#define LOGW(...) __android_log_print(ANDROID_LOG_WARN, TAG, __VA_ARGS__)&#10;#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, TAG, __VA_ARGS__)&#10;#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__)&#10;#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, TAG, __VA_ARGS__)&#10;#define LOGF(...) __android_log_print(ANDROID_LOG_FATAL, TAG, __VA_ARGS__)" description="Define log macro for android" toReformat="true" toShortenFQNames="true">
+  <template name="logger" value="#include &lt;android/log.h&gt;&#10;&#10;#define LOG_TAG &quot;$FILE_BASE_NAME$&quot;&#10;#define ALOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)&#10;#define ALOGW(...) __android_log_print(ANDROID_LOG_WARN, LOG_TAG, __VA_ARGS__)&#10;#define ALOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)&#10;#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)&#10;#define ALOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)&#10;#define ALOGF(...) __android_log_print(ANDROID_LOG_FATAL, LOG_TAG, __VA_ARGS__)&#10;$END$" description="Define log macro for android" toReformat="true" toShortenFQNames="true">
     <variable name="FILE_BASE_NAME" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="OC_DECLARATION_C" value="true" />
-      <option name="OC_STATEMENT_C" value="false" />
     </context>
   </template>
   <template name="ifcpp" value="#ifdef __cplusplus&#10;extern &quot;C&quot; {&#10;#endif&#10;$END$&#10;#ifdef __cplusplus&#10;} // extern &quot;C&quot;&#10;#endif" description="If defined cplusplus extern c" toReformat="true" toShortenFQNames="true">
     <context>
-      <option name="c" value="false" />
       <option name="OC_DECLARATION_C" value="true" />
-      <option name="OC_STATEMENT_C" value="false" />
-      <option name="OC_EXPRESSION_C" value="false" />
-      <option name="cpp" value="false" />
-      <option name="OC_DECLARATION_CPP" value="false" />
-      <option name="OC_STATEMENT_CPP" value="false" />
-      <option name="OC_EXPRESSION_CPP" value="false" />
+    </context>
+  </template>
+  <template name="logm" value="ALOGD(&quot;%d: %s&quot;, __LINE__, __FUNCTION__);" description="Log function name" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="OC_STATEMENT_C" value="true" />
     </context>
   </template>
 </templateSet>
