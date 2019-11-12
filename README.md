@@ -16,5 +16,20 @@ miscellaneous stuff will put here, configurations, code templates, tools, etc.
 * [man/eglman](man/eglman) man pages for EGL
 * [man/glslman](man/glslman) man pages for GLSL
 
+### Android studio live template
+[templates](templates) include extra live templates for Android studio. These files are exported from Android studio config directory, `~/Library/Preferences/AndroidStudioX.Y/templates` in macOS if the version is `X.Y`. It's located in `%HOMEPATH%\.AndroidStudioX.Y\config\templates` for Windows and `$HOME/.AndroidStudioX.Y/config/templates` for Linux.
+
+These exported live templates can be shared and imported like below.
+```bash
+$ cd /tmp
+$ wget /url/to/SharedTemplate.xml
+$ mkdir templates
+$ mv SharedTemplate.xml templates/
+$ touch install.txt
+$ touch "IntelliJ IDEA Global Settings"
+$ zip -r settings.zip templates install.txt IntelliJ\ IDEA\ Global\ Settings
+```
+Then in Android studio, use `File` -> `Import Settings...` to import and use the live templates.
+
 ### Documentation
 unpublished documentations
