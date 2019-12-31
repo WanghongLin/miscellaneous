@@ -41,7 +41,7 @@ def main():
     args = parser.parse_args()
 
     if not os.path.isdir(args.clheaders):
-        print 'not a directory {0}'.format(args.clheaders)
+        print ('not a directory {0}'.format(args.clheaders))
         return
 
     path_to_cl_h = args.clheaders
@@ -65,12 +65,12 @@ def main():
 
     for f in os.listdir(args.clheaders):
         if is_excluded_in_patterns(f, EXCLUDE_FILE_PATTERN):
-            print 'skip file {0}'.format(f)
+            print ('skip file {0}'.format(f))
             continue
         path_to_cl_h = args.clheaders + os.path.sep + f
 
         if os.path.isdir(path_to_cl_h):
-            print 'skip directory {0}'.format(path_to_cl_h)
+            print ('skip directory {0}'.format(path_to_cl_h))
             continue
 
         with open(path_to_cl_h) as f:
@@ -111,7 +111,7 @@ def main():
 
     with open('clext.h', 'w+') as f:
         f.writelines(write_lines)
-    print 'Create helper function in file clext.h'
+    print ('Create helper function in file clext.h')
 
     test_code_lines = []
     test_code_lines.append('\n\n#include "clext.h"\n')
@@ -119,7 +119,8 @@ def main():
     test_code_lines.append('\tconst int codes[] = { \n')
     test_code_lines.append('\t\t{0}\n'.format(','.join(test_codes)))
     test_code_lines.append('\t};\n')
-    test_code_lines.append('\tfor (int i = 0; i < sizeof(codes)/sizeof(int); i++) {\n')
+    test_code_lines.append('\tint i;')
+    test_code_lines.append('\tfor (i = 0; i < sizeof(codes)/sizeof(int); i++) {\n')
     test_code_lines.append('\t\tclCheckError(codes[i]);\n')
     test_code_lines.append('\t}\n')
     test_code_lines.append('\treturn 0;\n')
