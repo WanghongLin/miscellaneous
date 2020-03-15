@@ -61,7 +61,7 @@ shift $(($OPTIND-1))
 
 url=${@: -1}
 
-if ! [[ $url =~ ^http[s]://.*$ ]];then
+if ! [[ $url =~ ^https?://.*$ ]];then
     printf "\e[31mInvalid URL $url\e[0m\n"
     usage
     exit 1
