@@ -20,7 +20,7 @@
 # v0.1        initial version
 # v0.1.1      add output option
 
-slices=$(grep -c processor /proc/cpuinfo)
+slices=20
 url=
 output=
 
