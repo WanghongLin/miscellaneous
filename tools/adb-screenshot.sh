@@ -34,6 +34,7 @@ function view_cmd()
     case $OSTYPE in
 	linux*) _view_cmd="xdg-open %s" ;;
 	darwin*) _view_cmd="open %s" ;;
+	cygwin*) _view_cmd="cmd /c 'start %s'" ;;
 	*) ;;
     esac
     echo "$_view_cmd"
@@ -42,8 +43,16 @@ function view_cmd()
 function adb_screenshot() 
 {
     local f=Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png
-    adb shell screencap -p > $f && \
-	eval `printf "$(view_cmd)" $f`
+    [[ $OSTYPE =~ .*cygwin.* ]] && { 
+	_subcmd=exec-out;
+	_chmod="chmod u+x $f"; 
+    } || { 
+	_subcmd=shell;
+	_chmod=';'; 
+    }
+    eval adb $_subcmd screencap -p > $f
+    eval $_chmod
+    eval `printf "$(view_cmd)" $f`
 }
 
 #the following method can avoid image stretching if target device in landscape mode
