@@ -21,6 +21,14 @@
 # v0.1.1      add output option
 
 slices=20
+
+case $OSTYPE in
+    *linux*) slices=$(grep -c processor /proc/cpuinfo) ;;
+    *darwin*) slices=$(sysctl hw.ncpu | cut -d' ' -f2) ;;
+    *cygwin*) slices=$NUMBER_OF_PROCESSORS ;;
+    *) slices=20 ;;
+esac
+
 url=
 output=
 
@@ -37,7 +45,7 @@ function usage ()
     Options:
     -h|help       Display this message
     -v|version    Display script version
-    -s|slice      How many slices the download task will split, default is 20
+    -s|slice      How many slices the download task will split, default is $slices
     -o|output     Specify the output file name, use the guessing file name from url as output file name if not specify this option"
 
 }    # ----------  end of function usage  ----------
