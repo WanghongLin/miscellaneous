@@ -132,7 +132,7 @@ done
 until [ $is_finished -eq 1 ]
 do
 	if [ -f $$.1 ];then
-		total_kb=$(du -b $$.* | awk '{t+=$1}END{printf "%d", t/1024}')
+		total_kb=$(BLOCKSIZE=1024 du -k $$.* | awk '{t+=$1}END{printf "%d", t}')
 		duration=$((`date +%s`-$start_time))
 		[ $duration -gt 0 ] && printf "\rCurrent average speed %4d KiB/s" $(($total_kb/$duration))
 	fi
