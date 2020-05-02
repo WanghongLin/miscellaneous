@@ -2,6 +2,19 @@ Network mnemonics
 ======
 Here is some collection of mnemonics about network which can help you remember more details.
 
+__Ethernet frame__
+```
+People should do some type of dancing frequently
+Preamble - People - 7b
+Start frame delimiter - should - 1b
+Dest Mac - do - 6B
+Src Mac - some - 6B
+Type - type - 2B
+Data - dancing - 46~1500B
+Frame check sequence - frequently - 4B
+
+```
+
 __IP Header__
 
 Very Heavy Dudes Prefer Fat Fried Food To Pretty Healthy Salad Dish Options
