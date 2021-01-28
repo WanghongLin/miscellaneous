@@ -26,8 +26,8 @@ if [[ $# -lt 1 ]];then
 	exit 0
 fi
 
-dir=$(python -c 'import os;print(os.path.abspath("."))')
-name=($(basename ${dir}))
+dir=$(pwd)
+name=$(basename ${dir})
 out_file=${name}.cmake
 
 echo "# This file is generated from $0 at $(date)" > ${out_file}
@@ -39,8 +39,14 @@ echo >> ${out_file}
 
 for d in "$@"
 do
-	library_name=${d/\//_}
-	echo "aux_source_directory($dir/$d srcs_${library_name})" >> ${out_file}
+	library_name=$(echo $d | sed 's/[\/ ]/_/g')
+	src_dir=
+	if [[ "$d" =~ /.* ]];then
+		src_dir=$d
+	else
+		src_dir=${dir}/${d}
+	fi
+	echo "aux_source_directory(\"${src_dir}\" srcs_${library_name})" >> ${out_file}
 	echo 'add_library('"${library_name}"' MODULE ${srcs_'"${library_name}"'})' >> ${out_file}
 	echo >> ${out_file}
 done
