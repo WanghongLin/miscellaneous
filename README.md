@@ -11,6 +11,7 @@ miscellaneous stuff will put here, configurations, code templates, tools, etc.
 * [tools/clext.py](tools/clext.py) Convert OpenCL error code to humanreable string
 * [tools/clion-cmake.sh](tools/clion-cmake.sh) Create a simple cmake file for C/C++ source tree for the purpose of source code navigation
 * [tools/adb-screenshot-v2.bat](tools/adb-screenshot-v2.bat), [tools/adb-screenshot.bat](tools/adb-screenshot.bat), [tools/adb-screenshot.sh](tools/adb-screenshot.sh) ADB screenshot for Windows/macOS/Linux platform via `screencap` and `screenrecord`, support device landscape mode
+* [tools/compare.sh] Compare two files size with formated output
 
 ### Manpages
 * [man/eglman](man/eglman) man pages for EGL
